@@ -2,11 +2,14 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.TimedRobot
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
+
+val K_DEFAULT_AUTO = "Default";
+val K_CUSTOM_AUTO = "My Auto";
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -14,20 +17,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+class Robot : TimedRobot() {
+  var m_autoSelected = K_DEFAULT_AUTO
+  val m_chooser = SendableChooser<String>()
 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  @Override
-  public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
+  override fun robotInit() {
+    m_chooser.setDefaultOption("Default Auto", K_DEFAULT_AUTO);
+    m_chooser.addOption("My Auto", K_CUSTOM_AUTO);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 
@@ -38,8 +38,7 @@ public class Robot extends TimedRobot {
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
    * SmartDashboard integrated updating.
    */
-  @Override
-  public void robotPeriodic() {}
+  override fun robotPeriodic() {}
 
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
@@ -51,56 +50,47 @@ public class Robot extends TimedRobot {
    * below with additional strings. If using the SendableChooser make sure to add them to the
    * chooser code above as well.
    */
-  @Override
-  public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
+  override fun autonomousInit() {
+    m_autoSelected = m_chooser.getSelected()
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    System.out.println("Auto selected: " + m_autoSelected)
   }
 
   /** This function is called periodically during autonomous. */
-  @Override
-  public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
+  override fun autonomousPeriodic() {
+    when (m_autoSelected) {
+      K_CUSTOM_AUTO -> {
         // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
+      }
+      K_DEFAULT_AUTO -> {
+        // Put custom auto code here
+      }
+      else -> {
+      }
     }
   }
 
   /** This function is called once when teleop is enabled. */
-  @Override
-  public void teleopInit() {}
+  override fun teleopInit() {}
 
   /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {}
+  override fun teleopPeriodic() {}
 
   /** This function is called once when the robot is disabled. */
-  @Override
-  public void disabledInit() {}
+  override fun disabledInit() {}
 
   /** This function is called periodically when disabled. */
-  @Override
-  public void disabledPeriodic() {}
+  override fun disabledPeriodic() {}
 
   /** This function is called once when test mode is enabled. */
-  @Override
-  public void testInit() {}
+  override fun testInit() {}
 
   /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {}
+  override fun testPeriodic() {}
 
   /** This function is called once when the robot is first started up. */
-  @Override
-  public void simulationInit() {}
+  override fun simulationInit() {}
 
   /** This function is called periodically whilst in simulation. */
-  @Override
-  public void simulationPeriodic() {}
+  override fun simulationPeriodic() {}
 }
